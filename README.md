@@ -143,6 +143,10 @@ bash AWS_S3_CLI_command.sh
   - Use AWS Athena to query data stored in the Glue data Catalog made for Analytics.
   - Create interactive dashboard in AWS Quicksight to generate visualizations & observe key-metrics for running advertisement campaigns on better performing youtube videos.
 <p align="center">
+    <img src="docs/athena.png" alt="AWS-athena" width="1050"/>
+</p>
+
+<p align="center">
     <img src="docs/dashboard-for-youtube.png" alt="dashboard" width="1050"/>
 </p>
   
