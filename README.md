@@ -1,3 +1,4 @@
+[<img src="docs/aws-svgrepo-com.png" align="right" width="60">](https://aws.amazon.com/console/)
 # Youtube-Data-Engineering-Pipeline 📺
 ## 📝 Overview
 Embark on a transformative journey with the YouTube Data Engineering Pipeline repository! This project offers a robust solution meticulously crafted to efficiently manage, process, and analyze YouTube video data leveraging the power of AWS services. Whether you're diving into structured statistics or exploring the nuances of trending key metrics, this pipeline is engineered to handle it all with finesse.
