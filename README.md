@@ -58,12 +58,14 @@ Each file includes metadata such as video title, channel title, publication time
 ```
 bash AWS_S3_CLI_command.sh
 ```
-### Data Schema Understanding
+### Data Schema Understanding for both JSON & CSV files
 - **Description**: Use AWS Glue crawler to explore raw data stored in S3 buckets and create a database with tables.
 - **Technical Details**:
-  - Configure AWS Glue crawler to crawl S3 bucket paths containing raw data reference JSON files.
+  - Configure AWS Glue crawler to crawl S3 bucket path containing raw data reference JSON files.
   - Run the Glue crawler to discover schema and create a database with a table based on the JSON files.
-  - *****here
+  - Configure second AWS GLue crawler to crawl S3 bucket path containing raw data CSV files.
+  - Run the Glue crawler to discover schema and create a database with a table based on the CSV files.
+  - This will generate partition key of `region` automatically as we have stored the data file in such directory tree format
 
 ### Solving JSON format error using AWS Lambda
 - **Description**: Resolve issues with JSON file format not accepted by AWS services according to JSONSerDe Library; thereby converting JSON files to Parquet format.
@@ -72,14 +74,43 @@ bash AWS_S3_CLI_command.sh
   - Setup Environment Variables for configuring S3 cleansed layer path, glue catalog database, and table name along with type of write data operation ("APPEND")
   - Add AWS Lambda layer of "AWSSDKPandas-Python38" to get the compute environment with the required packages & dependencies installed
   - Change the timeout time and memory requirement in configuration
-  - Implement necessary data transformations and extracting only required column in the Lambda function `AWS_GLUE_ETL_pyspark_code.py`
+  - Implement necessary data transformations and extracting only required column in the Lambda function `AWS_lambda_function.py`
   - Configure test event to check for one json file first using s3-put event test by providing the bucket and key (file path).
-  - **** Creating Tigger
+  - Create Trigger on the S3 bucket path , use event type of `all object create events`, prefix as bucket-key and suffix as `json`.
 
-### 
+### Updating the datatype of id in cleansed reference data
+- **Description**: When we generate the parquet file for reference data using lambda, the datatype of 'id' is converted into string, but we need it as bigint for joining the table with raw data.
+- **Technical Details**:
+  - Update the datetype to bigint in glue catalog table
+  - Run the AWS lambda query again as it is an "APPEND" write function it will automatically update the datatype format for the generated 'id' in the parquet file to bigint
+ 
+### Create AWS Glue ETL job for CSV files in raw data
+- **Description**: Creating Glue ETL job that will convert the csv file to the parquet format for the raw data S3 bucket path
+- **Technical Details**:
+  - Create Glue Job with Data source as S3 or glue data catalog table (from csv crawler database glue table)
+  - Then will connect the data source block to the Transform: Change schema block, where we update the schema for selected fields
+  - For output data target S3 bucket is selected with format of parquet
+  - Use `AWS_GLUE_ETL_pyspark_code.py` script for selecting only few regions with paritioned individual parquet files in `region` folder format
+  - Update the partition key of the output parquet file to "region"
+  - If script is not used, then only a single parquet file is created for all csv files, without proper partitioning of subfolders with regions
 
+### Create AWS Glue crawler for the cleansed parquet files of raw data:
+- **Description**: Use AWS Glue crawler to explore cleansed parquet files from csv in S3 buckets and create a database with tables.
+- **Technical Details**:
+  - Configure AWS Glue crawler to crawl S3 bucket path containing data parquet (generated from etl job-csv files) cleansed files.
+  - Run the Glue crawler to discover schema and create a database with a table based on them.
 
-
+### Create AWS Glue ETL job for CSV files in raw data
+- **Description**: Creating Glue ETL job that will convert the csv file to the parquet format for the raw data S3 bucket path
+- **Technical Details**:
+  - Create Glue Job with Data source as S3 or glue data catalog table (from csv crawler database glue table)
+  - Then will connect the data source block to the Transform: Change schema block, where we update the schema for selected fields
+  - For output data target S3 bucket is selected with format of parquet
+  - Use `AWS_GLUE_ETL_pyspark_code.py` script for selecting only few regions with paritioned individual parquet files in `region` folder format
+  - Update the partition key of the output parquet file to "region"
+  - If script is not used, then only a single parquet file is created for all csv files, without proper partitioning of subfolders with regions
+ 
+### Reporting on AWS QuickSight
 
   
 ## 👋 Connect with Me
