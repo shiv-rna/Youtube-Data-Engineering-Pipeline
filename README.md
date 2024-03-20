@@ -90,27 +90,33 @@ bash AWS_S3_CLI_command.sh
   - Create Glue Job with Data source as S3 or glue data catalog table (from csv crawler database glue table)
   - Then will connect the data source block to the Transform: Change schema block, where we update the schema for selected fields
   - For output data target S3 bucket is selected with format of parquet
+  - Make sure to attach the IAM role of Glue service created previously
   - Use `AWS_GLUE_ETL_pyspark_code.py` script for selecting only few regions with paritioned individual parquet files in `region` folder format
   - Update the partition key of the output parquet file to "region"
   - If script is not used, then only a single parquet file is created for all csv files, without proper partitioning of subfolders with regions
 
-### Create AWS Glue crawler for the cleansed parquet files of raw data:
+### Create AWS Glue crawler for the cleansed parquet files of raw data
 - **Description**: Use AWS Glue crawler to explore cleansed parquet files from csv in S3 buckets and create a database with tables.
 - **Technical Details**:
   - Configure AWS Glue crawler to crawl S3 bucket path containing data parquet (generated from etl job-csv files) cleansed files.
   - Run the Glue crawler to discover schema and create a database with a table based on them.
 
 ### Create AWS Glue ETL job for CSV files in raw data
-- **Description**: Creating Glue ETL job that will convert the csv file to the parquet format for the raw data S3 bucket path
+- **Description**: Creating Glue ETL job that will join AWS glue data catalog of cleansed CSV-parquet files & reference JSON-parquet files
 - **Technical Details**:
-  - Create Glue Job with Data source as S3 or glue data catalog table (from csv crawler database glue table)
-  - Then will connect the data source block to the Transform: Change schema block, where we update the schema for selected fields
-  - For output data target S3 bucket is selected with format of parquet
-  - Use `AWS_GLUE_ETL_pyspark_code.py` script for selecting only few regions with paritioned individual parquet files in `region` folder format
+  - Create Glue Job with 2 Data source as AWS glue data catalogs 
+  - Then will connect the 2 data source block to the Transform: Inner Join, where condition will be `category_id` from `CSV-parquet glue data catalog` should be equal to `id` from reference `JSON-parquet glue data catalog`
+  - For output data target S3 bucket for analytics is created with format of parquet and attach it with new database.
+  - Create database in Glue for analytics that will save the info of the joined table.
+  - Use Partition keys of region and category_id
   - Update the partition key of the output parquet file to "region"
-  - If script is not used, then only a single parquet file is created for all csv files, without proper partitioning of subfolders with regions
+  - Make sure to attach the IAM role of Glue service created previously
  
-### Reporting on AWS QuickSight
+### Reporting on AWS QuickSight & Querying on AWS Athena
+- **Description**: Develop a dashboard for visualizing insights and trends in the data. Use SQL query to understand the data.
+- **Technical Details**:
+  - Use AWS Athena to query data stored in the Glue data Catalog made for Analytics.
+  - Create interactive dashboard in AWS Quicksight to generate visualizations & observe key-metrics for running advertisement campaigns on better performing youtube videos.
 
   
 ## 👋 Connect with Me
