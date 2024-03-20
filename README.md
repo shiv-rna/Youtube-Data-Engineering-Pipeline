@@ -1,6 +1,7 @@
 # Youtube-Data-Engineering-Pipeline 📺
 ## 📝 Overview
 Embark on a transformative journey with the YouTube Data Engineering Pipeline repository! This project offers a robust solution meticulously crafted to efficiently manage, process, and analyze YouTube video data leveraging the power of AWS services. Whether you're diving into structured statistics or exploring the nuances of trending key metrics, this pipeline is engineered to handle it all with finesse.
+
 ## 🎯 Pipeline Goals
 - **Data Ingestion**: Forge a resilient data ingestion mechanism capable of harmonizing data from disparate sources, prioritizing reliability.
 - **ETL Excellence**: Engineer an Extract, Transform, Load (ETL) system to streamline the transformation of raw data into a standardized format.
@@ -9,7 +10,19 @@ Embark on a transformative journey with the YouTube Data Engineering Pipeline re
 - **Cloud Empowerment**: Harness the prowess of AWS cloud infrastructure to efficiently process and analyze extensive datasets.
 - **Insightful Reporting**: Craft interactive dashboards in Amazon QuickSight, for visualization & analysis to drive informed decision-making.
 
-## 💼 Services Utilized
+## 📂 Dataset
+The project utilizes a Kaggle dataset containing statistics on daily popular YouTube videos. 
+- There are up to 200 trending videos published every day for many locations. 
+- The data for each region is in its own file.
+  
+Each file includes metadata such as video title, channel title, publication time, tags, views, likes, dislikes, description, comment count, and category ID. The data also includes a category_id field, which varies between regions. To retrieve the categories for a specific video, find it in the associated JSON. One such file is included for each of the regions in the dataset. This dataset is been updated daily.
+
+[Dataset Source](https://www.kaggle.com/datasets/rsrishav/youtube-trending-video-dataset)
+
+## 🏗 Architecture Overview:
+
+
+## ⚙ Technology Stack
 1. **Amazon S3 (Simple Storage Service)**:
    - Serves as the primary data lake solution, offering highly scalable, durable, and secure object storage.
    - Leverages S3's RESTful API for seamless storing and retrieval of structured and unstructured data.
@@ -46,6 +59,7 @@ Embark on a transformative journey with the YouTube Data Engineering Pipeline re
    - Serverless architecture eliminates the need for infrastructure provisioning.
    - Integration with AWS Glue data catalog simplifies schema management and query optimization, enabling rapid insights generation from the centralized data lake.
 
-## Dataset
-The project utilizes a Kaggle dataset containing statistics on daily popular YouTube videos. Each file includes metadata such as video title, channel title, publication time, tags, views, likes, dislikes, description, comment count, and category ID.
+
+
+
 
