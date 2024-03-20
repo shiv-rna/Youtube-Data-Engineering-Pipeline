@@ -76,7 +76,7 @@ bash AWS_S3_CLI_command.sh
   - Run the Glue crawler to discover schema and create a database with a table based on the CSV files.
   - This will generate partition key of `region` automatically as we have stored the data file in such directory tree format
 <p align="center">
-    <img src="docs/glue-crawl-json.gif" alt="S3-bucket-raw" width="1050"/>
+    <img src="docs/glue-crawl-json.gif" alt="glue-crawler" width="1050"/>
 </p>
 
 ### Solving JSON format error using AWS Lambda
@@ -90,10 +90,10 @@ bash AWS_S3_CLI_command.sh
   - Configure test event to check for one json file first using s3-put event test by providing the bucket and key (file path).
   - Create Trigger on the S3 bucket path , use event type of `all object create events`, prefix as bucket-key and suffix as `json`.
 <p align="center">
-    <img src="docs/Lambda.png" alt="S3-bucket-raw" width="1050"/>
+    <img src="docs/Lambda.png" alt="lambda-function" width="1050"/>
 </p>
 <p align="center">
-    <img src="docs/env_var.png" alt="S3-bucket-raw" width="1050"/>
+    <img src="docs/env_var.png" alt="env-variables" width="1050"/>
 </p>
 
 ### Updating the datatype of id in cleansed reference data
@@ -141,7 +141,9 @@ bash AWS_S3_CLI_command.sh
 - **Technical Details**:
   - Use AWS Athena to query data stored in the Glue data Catalog made for Analytics.
   - Create interactive dashboard in AWS Quicksight to generate visualizations & observe key-metrics for running advertisement campaigns on better performing youtube videos.
-
+<p align="center">
+    <img src="docs/dashboard-for-youtube.png" alt="dashboard" width="1050"/>
+</p>
   
 ## 👋 Connect with Me
 Let's connect and continue the conversation! Feel free to reach out to me via my socials below to share your thoughts, insights, and experiences with this modern AWS Data Engineering Pipeline. I look forward to connecting with fellow AWS enthusiasts and data engineering enthusiasts for ideas to improve this project! 
