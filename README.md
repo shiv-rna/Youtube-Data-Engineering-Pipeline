@@ -23,41 +23,13 @@ Each file includes metadata such as video title, channel title, publication time
 
 
 ## ⚙ Technology Stack
-1. **Amazon S3 (Simple Storage Service)**:
-   - Serves as the primary data lake solution, offering highly scalable, durable, and secure object storage.
-   - Leverages S3's RESTful API for seamless storing and retrieval of structured and unstructured data.
-   - Multi-region replication and versioning capabilities ensure data durability and availability.
-   - Features like lifecycle policies enable cost-effective data management strategies.
+1. **Amazon S3 (Simple Storage Service)**: Primary data lake solution with scalable, durable, and secure object storage. Leverages RESTful API, multi-region replication, versioning, and lifecycle policies.
+2. **AWS IAM (Identity and Access Management)**: Robust identity and access management controls safeguard resources through least privilege access, fine-grained policies, role-based access control (RBAC), and temporary security credentials.
+3. **Amazon QuickSight**: Cloud-native business intelligence tool enabling interactive exploration and visualization of data. Leverages in-memory engine, SPICE architecture, and integration with AWS data sources for seamless ingestion and analysis.
+4. **AWS Glue**: Fully managed ETL service automating data discovery, transformation, and integration. Features dynamic data catalog, schema inference, serverless architecture, and seamless integration with Amazon S3 and Athena.
+5. **AWS Lambda**: Powers serverless computing infrastructure for event-driven data processing and analysis. Executes code in response to triggers, with pay-per-use pricing, automatic scaling, and seamless integration with other AWS services.
+6. **Amazon Athena**: Interactive query service for analyzing data stored in Amazon S3 using standard SQL. Features distributed query processing engine, serverless architecture, and integration with AWS Glue data catalog for rapid insights generation.
 
-2. **AWS IAM (Identity and Access Management)**:
-   - Provides robust identity and access management controls to safeguard resources.
-   - Enforces least privilege access through fine-grained policies and roles.
-   - Role-based access control (RBAC) and temporary security credentials enable secure delegation of permissions.
-   - IAM policies facilitate granular control over API actions, enhancing the overall security posture.
-
-3. **Amazon QuickSight**:
-   - Serves as the cloud-native business intelligence tool, enabling interactive exploration and visualization of data.
-   - Leverages QuickSight's in-memory engine and SPICE architecture for near-real-time analytics at scale.
-   - Integration with AWS data sources like Amazon S3 and Athena allows seamless data ingestion and analysis.
-   - Extensible API facilitates custom dashboarding and reporting solutions.
-
-4. **AWS Glue**:
-   - Acts as the fully managed ETL (Extract, Transform, Load) service, automating the process of data discovery, transformation, and integration.
-   - Dynamic data catalog and schema inference capabilities streamline the identification and classification of data.
-   - Serverless architecture scales automatically to handle varying workloads.
-   - Integration with services like Amazon S3 and Athena ensures seamless data movement and querying across the analytics pipeline.
-
-5. **AWS Lambda**:
-   - Powers the serverless computing infrastructure, enabling event-driven data processing and analysis.
-   - Executes code in response to triggers such as data ingestion events or scheduled tasks.
-   - Pay-per-use pricing model and automatic scaling capabilities optimize cost-efficiency and resource utilization.
-   - Leverages Lambda functions to perform tasks such as data validation, enrichment, and notification, seamlessly integrating with other AWS services within the pipeline architecture.
-
-6. **Amazon Athena**:
-   - Provides an interactive query service for analyzing data stored in Amazon S3 using standard SQL.
-   - Leveraging Athena's distributed query processing engine, execute ad-hoc queries on data with minimal setup and management overhead.
-   - Serverless architecture eliminates the need for infrastructure provisioning.
-   - Integration with AWS Glue data catalog simplifies schema management and query optimization, enabling rapid insights generation from the centralized data lake.
 
 
 
